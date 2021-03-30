@@ -1,0 +1,9 @@
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\bin\Debug\netcoreapp3.1\learnings.models.deps.json
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\bin\Debug\netcoreapp3.1\learnings.models.dll
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\bin\Debug\netcoreapp3.1\learnings.models.pdb
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\obj\Debug\netcoreapp3.1\learnings.models.csprojAssemblyReference.cache
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\obj\Debug\netcoreapp3.1\learnings.models.AssemblyInfoInputs.cache
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\obj\Debug\netcoreapp3.1\learnings.models.AssemblyInfo.cs
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\obj\Debug\netcoreapp3.1\learnings.models.csproj.CoreCompileInputs.cache
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\obj\Debug\netcoreapp3.1\learnings.models.dll
+D:\workspace\learnings\dotNetCore\learnings\learnings.models\obj\Debug\netcoreapp3.1\learnings.models.pdb

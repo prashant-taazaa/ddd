@@ -1,0 +1,12 @@
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\bin\Debug\netcoreapp3.1\learnings.data.deps.json
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\bin\Debug\netcoreapp3.1\learnings.data.runtimeconfig.json
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\bin\Debug\netcoreapp3.1\learnings.data.runtimeconfig.dev.json
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\bin\Debug\netcoreapp3.1\learnings.data.dll
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\bin\Debug\netcoreapp3.1\learnings.data.pdb
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.AssemblyInfoInputs.cache
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.AssemblyInfo.cs
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.csproj.CoreCompileInputs.cache
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.dll
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.pdb
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.genruntimeconfig.cache
+D:\workspace\learnings\dotNetCore\learnings\learnings.data\obj\Debug\netcoreapp3.1\learnings.data.csprojAssemblyReference.cache
