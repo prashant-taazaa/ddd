@@ -30,6 +30,7 @@ namespace todo.api
             services.AddControllers();
             services.AddEntityFrameworkNpgsql().AddDbContext<TodoDbContext>(opt =>
                   opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

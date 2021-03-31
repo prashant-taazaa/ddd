@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QWT6nS73hj601Z7CPLdrrAUAqowdJOEn+0n8ZjDGBQlZG7UJxk4fMd4FB+mHq2kIbfSm8LQ0Osb2bO2QHraQSQ==",
+  "dgSpecHash": "Vb3yc2rU8ueTii8ZzlF0cs9f76bY2PpJosI5H5qT5LWc6SHeaIP+H1h8MnefzVF4mWQRL23fY3zltAten/MykQ==",
   "success": true,
   "projectFilePath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\todo.api.csproj",
   "expectedPackageFiles": [
