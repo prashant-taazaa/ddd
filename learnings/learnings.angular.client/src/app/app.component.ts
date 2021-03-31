@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
@@ -10,27 +11,24 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 export class AppComponent implements OnInit {
 
   private apiBaseUri = 'https://localhost:6001/api';
+  loading: boolean = false;
 
-  constructor(private _httpClient: HttpClient, public oidcSecurityService: OidcSecurityService) {
+  constructor(private _httpClient: HttpClient,
+    public oidcSecurityService: OidcSecurityService,
+    private router: Router) {
 
   }
 
 
   ngOnInit(): void {
-    this.oidcSecurityService.checkAuth().subscribe((auth) => console.log('is authenticated', auth));
-    // this._httpClient.get(`${this.apiBaseUri}/identity`).subscribe((response: any) => {
-    //   console.log(response);
+    this.loading = true;
+    this.oidcSecurityService.checkAuth().subscribe((auth) => {
+      console.log('is authenticated', auth);
+      this.loading = false;
+      if (!auth) {
+        this.oidcSecurityService.authorize();
+      }
+    });
 
-    // }, (error: any) => {
-    //   console.log(error);
-
-    // })
-  }
-  login() {
-    this.oidcSecurityService.authorize();
-  }
-
-  logout() {
-    this.oidcSecurityService.logoff();
   }
 }

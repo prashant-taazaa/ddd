@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { EventTypes, PublicEventsService } from 'angular-auth-oidc-client';
 import { filter } from 'rxjs/operators';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,26 +8,22 @@ import { AppComponent } from './app.component';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { HomeComponent } from './components/home/home.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-
-const routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'forbidden', component: UnauthorizedComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-];
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AuthConfigModule,
-    RouterModule.forRoot(routes)
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
