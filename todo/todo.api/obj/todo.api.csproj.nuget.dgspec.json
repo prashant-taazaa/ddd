@@ -31,8 +31,8 @@
               "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
                 "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj"
               },
-              "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.repositories.csproj": {
-                "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.repositories.csproj"
+              "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj": {
+                "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj"
               }
             }
           }
@@ -90,14 +90,78 @@
         }
       }
     },
-    "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj": {
+    "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj",
-        "projectName": "todo.building.blocks",
-        "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj",
+        "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj",
+        "projectName": "todo.infrastructure.shared",
+        "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj",
         "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
         "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prashant.kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
+                "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj",
+        "projectName": "todo.domain",
+        "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj",
+        "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
+        "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\prashant.kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -144,70 +208,12 @@
         }
       }
     },
-    "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
+    "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj",
-        "projectName": "todo.domain",
-        "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj",
-        "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
-        "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\prashant.kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
-            "projectReferences": {
-              "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj": {
-                "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.repositories.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.repositories.csproj",
-        "projectName": "todo.repositories",
-        "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.repositories.csproj",
+        "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj",
+        "projectName": "todo.infrastructure.persistence",
+        "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj",
         "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
         "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\obj\\",
         "projectStyle": "PackageReference",
@@ -226,8 +232,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj": {
-                "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj"
+              "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj": {
+                "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj"
               },
               "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
                 "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj"

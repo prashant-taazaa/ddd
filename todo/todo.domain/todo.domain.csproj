@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\todo.building.blocks\todo.building.blocks.csproj" />
-  </ItemGroup>
-
 </Project>

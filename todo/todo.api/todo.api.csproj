@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\todo.domain\todo.domain.csproj" />
-    <ProjectReference Include="..\todo.repositories\todo.repositories.csproj" />
+    <ProjectReference Include="..\todo.repositories\todo.infrastructure.persistence.csproj" />
   </ItemGroup>
 
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using todo.building.blocks;
 
-namespace todo.repositories.Interfaces
+namespace todo.infrastructure.shared.Interfaces
 {
     public interface IRepository<T>
     {

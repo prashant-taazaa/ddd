@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using todo.repositories.Interfaces;
-namespace todo.repositories
+using todo.infrastructure.persistence.Interfaces;
+using todo.infrastructure.shared;
+using todo.infrastructure.shared.Data;
+
+namespace todo.infrastructure.persistence
 {
     public class TaskRepository : BaseRepository<domain.Models.Task>, ITaskRepository
     {
-        public TaskRepository(TodoDbContext dbContext) : base(dbContext)
+        public TaskRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
 
         }

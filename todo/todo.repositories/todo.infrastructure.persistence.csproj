@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\todo.building.blocks\todo.building.blocks.csproj" />
+    <ProjectReference Include="..\todo.building.blocks\todo.infrastructure.shared.csproj" />
     <ProjectReference Include="..\todo.domain\todo.domain.csproj" />
   </ItemGroup>
 

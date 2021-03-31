@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using todo.building.blocks;
 
 namespace todo.domain.Models
 {

@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {
-      "todo.building.blocks/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/todo.building.blocks.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/todo.building.blocks.dll": {}
-        }
-      }
-    }
+    ".NETCoreApp,Version=v3.1": {}
   },
-  "libraries": {
-    "todo.building.blocks/1.0.0": {
-      "type": "project",
-      "path": "../todo.building.blocks/todo.building.blocks.csproj",
-      "msbuildProject": "../todo.building.blocks/todo.building.blocks.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": [
-      "todo.building.blocks >= 1.0.0"
-    ]
+    ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\": {}
@@ -52,11 +33,7 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {
-            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj": {
-              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.building.blocks.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

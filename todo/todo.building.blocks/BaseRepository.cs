@@ -1,23 +1,27 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using todo.building.blocks;
-using todo.repositories.Interfaces;
+using todo.domain;
+using todo.infrastructure.shared.Data;
+using todo.infrastructure.shared.Interfaces;
 
-namespace todo.repositories
+namespace todo.infrastructure.shared
 {
     public class BaseRepository<T> : IRepository<T> where T : Aggregate
     {
-        private TodoDbContext _dbContext;
-        public BaseRepository(TodoDbContext dbContext)
+        private ApplicationDbContext _dbContext;
+        private DbSet<T> _dbSet;
+
+        public BaseRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
         }
 
         public virtual void Add(T entity)
         {
-             _dbContext.Set<T>().Add(entity);
+            _dbSet.Add(entity);
         }
 
         public virtual void Delete(Guid id)
@@ -26,24 +30,24 @@ namespace todo.repositories
 
             if (entity != null)
             {
-                _dbContext.Set<T>().Remove(entity);
+                _dbSet.Remove(entity);
             }
 
         }
 
         public virtual IEnumerable<T> GetAll()
         {
-            return _dbContext.Set<T>().ToList();
+            return _dbSet.ToList();
         }
 
         public virtual T GetByID(Guid id)
         {
-            return _dbContext.Set<T>().FirstOrDefault(x => x.Id == id);
+            return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(T entity)
         {
-            _dbContext.Set<T>().Update(entity);
+            _dbSet.Update(entity);
         }
     }
 }

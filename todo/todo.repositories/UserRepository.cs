@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using todo.domain.Models;
-using todo.repositories.Interfaces;
+﻿using todo.domain.Models;
+using todo.infrastructure.persistence.Interfaces;
+using todo.infrastructure.shared;
+using todo.infrastructure.shared.Data;
 
-namespace todo.repositories
+namespace todo.infrastructure.persistence
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(TodoDbContext dbContext) : base(dbContext)
+        public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
 
         }

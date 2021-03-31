@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace todo.building.blocks
+namespace todo.domain
 {
     public abstract class Entity
     {
