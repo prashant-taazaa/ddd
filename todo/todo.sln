@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{078DB38C-E557-431A-B5A2-C05F96663D17}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "todo.identity", "todo.identity\todo.identity.csproj", "{70647B84-DDEE-4418-A470-5B0F86FAA40A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{59739F63-89D4-4BA3-BFAD-87D1F4AD9E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59739F63-89D4-4BA3-BFAD-87D1F4AD9E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59739F63-89D4-4BA3-BFAD-87D1F4AD9E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70647B84-DDEE-4418-A470-5B0F86FAA40A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70647B84-DDEE-4418-A470-5B0F86FAA40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70647B84-DDEE-4418-A470-5B0F86FAA40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70647B84-DDEE-4418-A470-5B0F86FAA40A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{BDA86116-FE83-46D4-83D7-49CC2EC7591F} = {078DB38C-E557-431A-B5A2-C05F96663D17}
 		{65BF5AA8-0879-486F-8F48-11CB717DE861} = {1A0060F3-126B-4369-83AE-E9C3BBA8E6A8}
 		{59739F63-89D4-4BA3-BFAD-87D1F4AD9E2B} = {1A0060F3-126B-4369-83AE-E9C3BBA8E6A8}
+		{70647B84-DDEE-4418-A470-5B0F86FAA40A} = {C4F44953-5B42-46C8-9977-C5708EA5174C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {644919F6-BA34-4E64-8F4D-03FE3E8AF8D6}
