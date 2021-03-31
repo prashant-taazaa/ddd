@@ -8,9 +8,16 @@ namespace todo.domain.Models
         private string _email;
 
         public string Email { get { return _email; } set { _email = value; } }
-        public virtual Collection<Task> Tasks { get; protected set; }
+        public virtual Collection<Task> Tasks { get; protected set; } = new Collection<Task>();
 
         private User() { }
+
+        public User(string email)
+        {
+            Email = email;
+            Tasks = new Collection<Task>();
+        }
+
         public Task CreateTask(string description)
         {
             var task = new Task(description, this);

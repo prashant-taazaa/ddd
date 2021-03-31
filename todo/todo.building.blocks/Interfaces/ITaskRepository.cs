@@ -4,7 +4,7 @@ using System.Text;
 using todo.domain.Models;
 using todo.infrastructure.shared.Interfaces;
 
-namespace todo.infrastructure.persistence.Interfaces
+namespace todo.infrastructure.shared.Interfaces
 {
     public interface ITaskRepository : IRepository<Task>
     {

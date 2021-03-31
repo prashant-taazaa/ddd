@@ -10,12 +10,14 @@ namespace todo.domain.Models
         public string Description { get { return _description; } set { _description = value; } }
         public User CreatedBy { get { return _createdBy; } set { _createdBy = value; } }
         public virtual Status Status { get; set; }
-        public virtual Collection<Tag> Tags { get; set; }
+        public virtual Collection<Tag> Tags { get; set; } = new Collection<Tag>();
 
         private Task() { }
         public Task(string description, User user)
         {
-
+            Description = description;
+            CreatedBy = user;
+            //Status = new Status()
         }
     }
 }

@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using todo.infrastructure.persistence;
 using todo.infrastructure.shared.Data;
+using todo.infrastructure.shared.Interfaces;
 
 namespace todo.api
 {
@@ -25,6 +26,7 @@ namespace todo.api
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(opt =>
                   opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,7 @@
 ﻿using todo.domain.Models;
-using todo.infrastructure.persistence.Interfaces;
 using todo.infrastructure.shared;
 using todo.infrastructure.shared.Data;
+using todo.infrastructure.shared.Interfaces;
 
 namespace todo.infrastructure.persistence
 {
