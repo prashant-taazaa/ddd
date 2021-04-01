@@ -56,38 +56,26 @@ namespace todo.identity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                                                                       {
-                                                   options.SignIn.RequireConfirmedEmail = true;
-                                                               })
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
 
 
-            var builder = services.AddIdentityServer(options =>
-            {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-                options.UserInteraction.LoginUrl = "/Account/Login";
-                options.UserInteraction.LogoutUrl = "/Account/Logout";
-                options.Authentication = new AuthenticationOptions()
-                {
-                    CookieLifetime = TimeSpan.FromHours(10), // ID server cookie timeout set to 10 hours
-                    CookieSlidingExpiration = true
-                };
-            })
-            .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = b => b.UseNpgsql(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
-                })
+            var builder = services.AddIdentityServer()
+            .AddDeveloperSigningCredential()
+            //.AddConfigurationStore(options =>
+            //    {
+            //        options.ConfigureDbContext = b => b.UseNpgsql(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+            //    })
             .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = b => b.UseNpgsql(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
                     options.EnableTokenCleanup = true;
                 })
+            .AddInMemoryIdentityResources(Config.IdentityResources)
+            .AddInMemoryApiResources(Config.ApiResources)
+            .AddInMemoryClients(Config.Clients)
             .AddAspNetIdentity<ApplicationUser>();
 
             if (Environment.IsDevelopment())

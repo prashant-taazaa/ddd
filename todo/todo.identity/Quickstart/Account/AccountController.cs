@@ -209,6 +209,31 @@ namespace IdentityServerHost.Quickstart.UI
         }
 
 
+        [HttpPost]
+        [Route("api/[controller]")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestViewModel model)
+        {
+            //var aVal = 0; var blowUp = 1 / aVal;
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = new ApplicationUser { UserName = model.Email, Name = model.Name, Email = model.Email, Role = model.Role };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded) return BadRequest(result.Errors);
+
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("name", user.Name));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role",user.Role));
+
+            return Ok(new RegisterResponseViewModel(user));
+        }
+
+
         /*****************************************/
         /* helper APIs for the AccountController */
         /*****************************************/

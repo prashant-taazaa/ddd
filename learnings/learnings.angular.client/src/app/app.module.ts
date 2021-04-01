@@ -13,6 +13,8 @@ import { TodoService } from './services/todo.service';
 import { TaskManagerComponent } from './components/task-manager/task-manager.component';
 import { MaterialModule } from './shared-modules/material/material.module';
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     UnauthorizedComponent,
     TaskManagerComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 const routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'forbidden', component: UnauthorizedComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
@@ -12,6 +16,6 @@ const routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

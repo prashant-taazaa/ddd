@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  "todoWebApiBaseUri": "https://localhost:6001/api"
+  todoWebApiBaseUri: 'https://localhost:6001/api',
+  stsServerUri: 'https://localhost:5001',
 };
 
 /*
