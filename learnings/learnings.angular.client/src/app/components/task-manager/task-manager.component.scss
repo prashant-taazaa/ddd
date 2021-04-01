@@ -1,0 +1,12 @@
+.root-container {
+    max-width: 50%;
+    margin: auto;
+
+    .tasks-list-header {
+        height: 100px;
+
+        .add-task-btn {
+            float: right;
+        }
+    }
+}

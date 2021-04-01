@@ -9,30 +9,37 @@ import { AuthConfigModule } from './auth/auth-config.module';
 import { HomeComponent } from './components/home/home.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisterComponent } from './components/register/register.component';
+import { TodoService } from './services/todo.service';
+import { TaskManagerComponent } from './components/task-manager/task-manager.component';
+import { MaterialModule } from './shared-modules/material/material.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UnauthorizedComponent,
-    RegisterComponent
+    TaskManagerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AuthConfigModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [TodoService],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(private readonly eventService: PublicEventsService) {
     this.eventService
       .registerForEvents()
-      .pipe(filter((notification) => notification.type === EventTypes.ConfigLoaded))
+      .pipe(
+        filter((notification) => notification.type === EventTypes.ConfigLoaded)
+      )
       .subscribe((config) => console.log('ConfigLoaded', config));
   }
 }

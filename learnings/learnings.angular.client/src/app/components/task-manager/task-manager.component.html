@@ -1,0 +1,29 @@
+<div class="root-container">
+  <div class="tasks-list-header">
+    <mat-form-field class="example-full-width" style="width: 80%">
+      <input
+        matInput
+        [(ngModel)]="newTaskDescription"
+        placeholder="Task description"
+        value=""
+      />
+    </mat-form-field>
+    <button
+      (click)="CreateTask()"
+
+      mat-fab
+      color="primary"
+      class="add-task-btn"
+      aria-label="Create task button"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <div class="tasks-lists">
+    <mat-selection-list #shoes>
+      <mat-list-option *ngFor="let task of tasks">
+        {{ task }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>

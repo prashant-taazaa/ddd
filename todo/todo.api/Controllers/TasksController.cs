@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace todo.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TasksController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +25,10 @@ namespace todo.api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskModel createTaskModel)
         {
+            var context = HttpContext.User.Identity;
+
             var user = _unitOfWork.UserRepository.GetByID(createTaskModel.UserId);
+            
             var task = user.CreateTask(createTaskModel.Description);
 
             _unitOfWork.TaskRepository.Add(task);

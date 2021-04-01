@@ -3,7 +3,7 @@
 
 namespace todo.domain.Models
 {
-    public class User : Aggregate
+    public class User : Aggregate,Identity
     {
         private string _email;
 
