@@ -19,6 +19,8 @@ using System.Reflection;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.EntityFramework.DbContexts;
 using System.Linq;
+using IdentityServer4.Services;
+using todo.identity.Services;
 
 namespace todo.identity
 {
@@ -86,6 +88,8 @@ namespace todo.identity
             {
                 throw new Exception("need to configure key material");
             }
+
+            services.AddScoped<IProfileService, ProfileService>();
         }
 
         public void Configure(IApplicationBuilder app)

@@ -10,13 +10,13 @@ namespace todo.infrastructure.shared
 {
     public class BaseRepository<T,RContext> : IRepository<T> where T : Aggregate
     {
-        private IDbContext<RContext> _dbContext;
+        private DbContext _dbContext;
         private DbSet<T> _dbSet;
 
         public BaseRepository(IDbContext<RContext> dbContext)
         {
-            _dbContext = dbContext;
-            //_dbSet = _dbContext.Set<T>();
+            _dbContext = dbContext as DbContext;
+            _dbSet = _dbContext.Set<T>();
         }
 
         public virtual void Add(T entity)

@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,6 +20,23 @@ export class TodoService {
 
       this._httpClient
         .post(this.apiUrl, { description, userId }, this.headers())
+        .subscribe(
+          (response: any) => {
+            resolve(response);
+          },
+          (error: any) => {
+            reject(error);
+          }
+        );
+    });
+  }
+
+  Get(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const userId = '258c8274-eda4-47fc-9905-fbd265660539';
+
+      this._httpClient
+        .get(this.apiUrl + '?userId=' + userId, this.headers())
         .subscribe(
           (response: any) => {
             resolve(response);

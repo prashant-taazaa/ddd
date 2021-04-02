@@ -7,13 +7,23 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./task-manager.component.scss'],
 })
 export class TaskManagerComponent implements OnInit {
-  tasks: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  tasks: string[] = [];
 
   newTaskDescription = '';
 
   constructor(private _todoService: TodoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._todoService.Get().then(
+      (response: any[]) => {
+        debugger;
+        this.tasks = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   CreateTask() {
     const description = this.newTaskDescription.trim();

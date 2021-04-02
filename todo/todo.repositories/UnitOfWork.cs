@@ -13,7 +13,7 @@ namespace todo.infrastructure.persistence
         where RContext: DbContext
     {
         private readonly IDbContext<RContext> _dbContext;
-        private readonly DbContext _c1;
+        public  DbContext _c1 { get; private set; }
 
         public UnitOfWork(IDbContext<RContext> dbContext)
         {

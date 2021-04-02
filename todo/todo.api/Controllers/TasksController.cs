@@ -19,28 +19,43 @@ namespace todo.api.Controllers
     public class TasksController : ControllerBase
     {
         private readonly IUnitOfWork<ApplicationDbContext> _uf;
-        private readonly ApplicationDbContext _dbContext;
-
-        public TasksController(IDbContext<ApplicationDbContext> applicationDbContext)
+        private readonly ITaskRepository _taskRepository;
+        private readonly IUserRepository _userRepository;
+        public TasksController(IDbContext<ApplicationDbContext> applicationDbContext,
+            ITaskRepository taskRepository, IUserRepository userRepository)
         {
             _uf = new UnitOfWork<ApplicationDbContext>(applicationDbContext);
-            _dbContext = applicationDbContext as ApplicationDbContext;
+            _taskRepository = taskRepository;
+            _userRepository = userRepository;
         }
 
         [HttpPost]
+        [Authorize(Policy ="Admin")]
         public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskModel createTaskModel)
         {
             var context = HttpContext.User.Identity;
 
-            var user = _dbContext.Users.FirstOrDefault(x => x.Id == createTaskModel.UserId);
+            var user = _userRepository.GetByID(createTaskModel.UserId);
             
             var task = user.CreateTask(createTaskModel.Description);
 
-            _dbContext.Tasks.Add(task);
+            _taskRepository.Add(task);
 
             await _uf.CompleteAsync();
 
             return Created(@$"api/tasks/{task.Id}", task);
+        }
+
+        [HttpGet]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GettTasksAsync([FromQuery] Guid userId)
+        {
+            var context = HttpContext.User.Identity;
+
+            var user = _userRepository.GetByID(userId);
+            
+
+            return Ok(user.Tasks);
         }
     }
 }

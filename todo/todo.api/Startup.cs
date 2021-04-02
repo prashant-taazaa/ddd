@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using todo.api.Auth;
 using todo.infrastructure.persistence;
 using todo.infrastructure.shared.Data;
 using todo.infrastructure.shared.Interfaces;
@@ -35,6 +37,7 @@ namespace todo.api
                                       builder.WithOrigins("http://localhost:4200");
                                       builder.AllowAnyHeader();
                                       builder.AllowAnyMethod();
+                                      builder.AllowCredentials();
                                   });
             });
 
@@ -43,15 +46,17 @@ namespace todo.api
                   opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString")
                   
                   ));
-            services.AddScoped(typeof(IDbContext<ApplicationDbContext>), typeof(ApplicationDbContext));
-
 
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IdentityDbContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("IdentityConnectionString")));
 
+         
+            services.AddScoped(typeof(IDbContext<ApplicationDbContext>), typeof(ApplicationDbContext));
+            services.AddScoped(typeof(IDbContext<IdentityDbContext>), typeof(IdentityDbContext));
 
-
+            services.AddTransient(typeof(ITaskRepository), typeof(TaskRepository));
+            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
             //add authentication
             services.AddAuthentication(options=>
                       {
@@ -70,14 +75,12 @@ namespace todo.api
 
             services.AddAuthorization(options =>
             {
-                //options.AddPolicy("ApiScope", policy =>
-                //{
-                //   // policy.RequireAuthenticatedUser();
-                //    policy.RequireClaim("scope", "api1");
-                //});
+                options.AddPolicy("Admin", policy =>policy.Requirements.Add(new RoleRequirement("Admin")));
+                options.AddPolicy("AppUser", policy => policy.Requirements.Add(new RoleRequirement("AppUser")));
+
             });
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IAuthorizationHandler, RoleHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
