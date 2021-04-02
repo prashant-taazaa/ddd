@@ -8,15 +8,15 @@ using todo.infrastructure.shared.Interfaces;
 
 namespace todo.infrastructure.shared
 {
-    public class BaseRepository<T> : IRepository<T> where T : Aggregate
+    public class BaseRepository<T,RContext> : IRepository<T> where T : Aggregate
     {
-        private ApplicationDbContext _dbContext;
+        private IDbContext<RContext> _dbContext;
         private DbSet<T> _dbSet;
 
-        public BaseRepository(ApplicationDbContext dbContext)
+        public BaseRepository(IDbContext<RContext> dbContext)
         {
             _dbContext = dbContext;
-            _dbSet = _dbContext.Set<T>();
+            //_dbSet = _dbContext.Set<T>();
         }
 
         public virtual void Add(T entity)

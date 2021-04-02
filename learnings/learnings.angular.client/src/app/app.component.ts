@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       console.log('is authenticated', auth);
       this.loading = false;
       if (!auth) {
-        // this.oidcSecurityService.authorize();
+         this.oidcSecurityService.authorize();
       }
     });
 

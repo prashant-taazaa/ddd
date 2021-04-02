@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace todo.infrastructure.shared.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork<RContext> 
     {
-        IUserRepository UserRepository { get; }
-        ITaskRepository TaskRepository { get; }
-
         Task<int> CompleteAsync();
 
         Task<int> CompleteAsync(CancellationToken cancellationToken);

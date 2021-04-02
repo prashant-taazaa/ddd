@@ -38,8 +38,19 @@ namespace todo.api
                                   });
             });
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(opt =>
-                  opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString")));
+            services.AddEntityFrameworkNpgsql()
+                  .AddDbContext< ApplicationDbContext>(opt =>
+                  opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString")
+                  
+                  ));
+            services.AddScoped(typeof(IDbContext<ApplicationDbContext>), typeof(ApplicationDbContext));
+
+
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<IdentityDbContext>(opt =>
+                opt.UseNpgsql(Configuration.GetConnectionString("IdentityConnectionString")));
+
+
 
             //add authentication
             services.AddAuthentication(options=>
@@ -66,7 +77,7 @@ namespace todo.api
                 //});
             });
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

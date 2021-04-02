@@ -14,22 +14,22 @@ namespace todo.api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        //public UsersController(IUnitOfWork unitOfWork)
+        //{
+        //    _unitOfWork = unitOfWork;
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserModel createUserModel)
-        {
-            var user = new User(createUserModel.Email);
-            _unitOfWork.UserRepository.Add(user);
+        //[HttpPost]
+        //public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserModel createUserModel)
+        //{
+        //    var user = new User(createUserModel.Email);
+        //    _unitOfWork.UserRepository.Add(user);
 
-            await _unitOfWork.CompleteAsync();
+        //    await _unitOfWork.CompleteAsync();
 
-            return Created(@$"api/users/{user.Email}", user);
-        }
+        //    return Created(@$"api/users/{user.Email}", user);
+        //}
     }
 }
