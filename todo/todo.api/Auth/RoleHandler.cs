@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace todo.api.Auth
 {
-    public class RoleHandler : AuthorizationHandler<RoleRequirement>, IAuthorizationRequirement
+    public class RoleHandler : AuthorizationHandler<RoleRequirement>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         public RoleHandler(IHttpContextAccessor httpContextAccessor)

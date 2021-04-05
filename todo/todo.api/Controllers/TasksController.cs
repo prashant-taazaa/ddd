@@ -16,10 +16,9 @@ namespace todo.api.Controllers
     [Authorize]
     public class TasksController : AppBaseController
     {
-        private readonly IUnitOfWork<ApplicationDbContext> _uf;
         private readonly ITaskRepository _taskRepository;
         private readonly IUserRepository _userRepository;
-        public TasksController(            ITaskRepository taskRepository, IUserRepository userRepository)
+        public TasksController(ITaskRepository taskRepository, IUserRepository userRepository)
         {
             //_uf = new UnitOfWork<ApplicationDbContext>(applicationDbContext);
             _taskRepository = taskRepository;
