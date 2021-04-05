@@ -28,8 +28,8 @@ namespace todo.api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
 
+            services.AddControllers();
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -80,8 +80,9 @@ namespace todo.api
                 options.AddPolicy("AppUser", policy => policy.Requirements.Add(new RoleRequirement("AppUser")));
 
             });
+            services.AddHttpContextAccessor();
 
-            services.AddSingleton<IAuthorizationHandler, RoleHandler>();
+            services.AddScoped<IAuthorizationHandler, RoleHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

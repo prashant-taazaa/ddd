@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
@@ -9,14 +11,29 @@ using System.Threading.Tasks;
 
 namespace todo.api.Auth
 {
-    public class RoleHandler : AuthorizationHandler<RoleRequirement>
+    public class RoleHandler : AuthorizationHandler<RoleRequirement>, IAuthorizationRequirement
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public RoleHandler(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+      
+
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, RoleRequirement requirement)
         {
-            if (context.User.HasClaim(c => c.Type==ClaimTypes.Role && c.Value.Equals(requirement.Role)))
+            var authorizationFilterContext = context.Resource as AuthorizationFilterContext;
+
+            if (context.User.HasClaim(c => c.Type == ClaimTypes.Role && c.Value.Equals(requirement.Role)))
             {
                 context.Succeed(requirement);
             }
+            else
+            {
+                _httpContextAccessor.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                _httpContextAccessor.HttpContext.Response.WriteAsync("Unauthorize Access");
+            }
+
 
             return Task.CompletedTask;
         }
