@@ -9,48 +9,30 @@ using todo.infrastructure.shared.Interfaces;
 
 namespace todo.infrastructure.persistence
 {
-    public class UnitOfWork<RContext> : IUnitOfWork<RContext>, IAsyncDisposable 
-        where RContext: DbContext
+    public class UnitOfWork<TRepository> : IUnitOfWork<TRepository>, IAsyncDisposable 
+        where TRepository : IRepository
     {
-        private readonly IDbContext<RContext> _dbContext;
-        public  DbContext _c1 { get; private set; }
+        private readonly IRepository<TRepository> _repository;
+        //private readonly IDbContext<RContext> _dbContext;
+        //public  DbContext _c1 { get; private set; }
 
-        public UnitOfWork(IDbContext<RContext> dbContext)
+        public UnitOfWork( IRepository<TRepository> repository)
         {
-            _dbContext = dbContext;
-            _c1 = dbContext as DbContext;
+            _repository = repository;
+            //_dbContext = dbContext;
+            //_c1 = dbContext as DbContext;
 
         }
-
-        //public async Task<int> CompleteAsync()
-        //{
-        //    return await _c1.SaveChangesAsync().ConfigureAwait(false);
-        //}
-
-        //public Task<int> CompleteAsync(CancellationToken cancellationToken)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public ValueTask DisposeAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
 
         public async Task<int> CompleteAsync()
         {
-            return await _c1.SaveChangesAsync().ConfigureAwait(false);
+           return await _repository.SaveChangesAsync();
         }
 
-        public async Task<int> CompleteAsync(CancellationToken cancellationToken)
-        {
-            return await _c1.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        }
 
         public ValueTask DisposeAsync()
         {
-            return _c1.DisposeAsync();
+           return _repository.DisposeAsync();
         }
     }
 }

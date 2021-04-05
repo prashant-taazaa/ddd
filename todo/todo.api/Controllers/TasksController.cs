@@ -13,43 +13,41 @@ using todo.infrastructure.shared.Interfaces;
 
 namespace todo.api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     [Authorize]
-    public class TasksController : ControllerBase
+    public class TasksController : AppBaseController
     {
         private readonly IUnitOfWork<ApplicationDbContext> _uf;
         private readonly ITaskRepository _taskRepository;
         private readonly IUserRepository _userRepository;
-        public TasksController(IDbContext<ApplicationDbContext> applicationDbContext,
-            ITaskRepository taskRepository, IUserRepository userRepository)
+        public TasksController(            ITaskRepository taskRepository, IUserRepository userRepository)
         {
-            _uf = new UnitOfWork<ApplicationDbContext>(applicationDbContext);
+            //_uf = new UnitOfWork<ApplicationDbContext>(applicationDbContext);
             _taskRepository = taskRepository;
             _userRepository = userRepository;
         }
 
         [HttpPost]
-        [Authorize(Policy ="Admin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskModel createTaskModel)
         {
             var context = HttpContext.User.Identity;
 
             var user = _userRepository.GetByID(createTaskModel.UserId);
-            
+
             var task = user.CreateTask(createTaskModel.Description);
 
             _taskRepository.Add(task);
 
-            await _uf.CompleteAsync();
+            await _taskRepository.SaveChangesAsync();
 
             return Created(@$"api/tasks/{task.Id}", task);
         }
 
         [HttpGet]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> GettTasksAsync([FromQuery] Guid userId)
+        public async Task<IActionResult> GetTasksAsync([FromQuery] Guid userId)
         {
+
             var context = HttpContext.User.Identity;
 
             var user = _userRepository.GetByID(userId);

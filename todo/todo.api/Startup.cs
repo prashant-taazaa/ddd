@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using todo.api.Auth;
+using todo.api.Middlewares;
 using todo.infrastructure.persistence;
 using todo.infrastructure.shared.Data;
 using todo.infrastructure.shared.Interfaces;
@@ -27,7 +28,7 @@ namespace todo.api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddMvc();
 
             services.AddCors(options =>
             {
@@ -42,10 +43,10 @@ namespace todo.api
             });
 
             services.AddEntityFrameworkNpgsql()
-                  .AddDbContext< ApplicationDbContext>(opt =>
-                  opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString")
-                  
-                  ));
+                  .AddDbContext<ApplicationDbContext>(opt =>
+                  {
+                      opt.UseNpgsql(Configuration.GetConnectionString("DatabaseConnectionString"));
+                  });
 
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IdentityDbContext>(opt =>
@@ -86,10 +87,14 @@ namespace todo.api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+
+            // global error handler
+            app.UseMiddleware(typeof(ErrorHandlerMiddleware));
+
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseHttpsRedirection();
 
@@ -99,6 +104,8 @@ namespace todo.api
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {
