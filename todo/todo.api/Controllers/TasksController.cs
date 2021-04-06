@@ -19,7 +19,6 @@ namespace todo.api.Controllers
         private readonly IUserRepository _userRepository;
         public TasksController(ITaskRepository taskRepository, IUserRepository userRepository)
         {
-            //_uf = new UnitOfWork<ApplicationDbContext>(applicationDbContext);
             _taskRepository = taskRepository;
             _userRepository = userRepository;
         }
@@ -82,7 +81,9 @@ namespace todo.api.Controllers
             }
             else
             {
-                return Ok(user.Tasks);
+                var tasks = _taskRepository.GetAll().Where(x => x.CreatedBy == user);
+              
+                return Ok(tasks);
             }
 
         }
