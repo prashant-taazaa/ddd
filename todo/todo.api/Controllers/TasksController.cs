@@ -13,7 +13,6 @@ using todo.infrastructure.shared.Interfaces;
 
 namespace todo.api.Controllers
 {
-    [Authorize]
     public class TasksController : AppBaseController
     {
         private readonly ITaskRepository _taskRepository;
@@ -25,13 +24,29 @@ namespace todo.api.Controllers
             _userRepository = userRepository;
         }
 
+
+        /// <summary>
+        /// Create a new task for logged in user
+        /// </summary>
+        /// <param name="createTaskModel"> Task Model With Description which needs to be created</param>
+        /// <returns>New Created Task</returns>
+        /// <response code="201">Returns the newly created task</response>
+        /// <response code="404">If the user not found</response>
         [HttpPost]
         [Authorize(Policy = "Admin")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskModel createTaskModel)
         {
+
             var context = HttpContext.User.Identity;
 
             var user = _userRepository.GetByID(createTaskModel.UserId);
+
+            if (user == null)
+            {
+                return NotFound($"User not found with id {createTaskModel.UserId}");
+            }
 
             var task = user.CreateTask(createTaskModel.Description);
 
@@ -40,19 +55,36 @@ namespace todo.api.Controllers
             await _taskRepository.SaveChangesAsync();
 
             return Created(@$"api/tasks/{task.Id}", task);
+
         }
 
+
+        /// <summary>
+        /// Return All task of logged in user
+        /// </summary>
+        /// <param name="userId">User Id of logged in user</param>
+        /// <returns>List of task of logged in User </returns>
+        /// <response code="200">List of task of logged in User</response>
+        /// <response code="404">If the user not found</response>
         [HttpGet]
         [Authorize(Policy = "Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetTasksAsync([FromQuery] Guid userId)
         {
 
             var context = HttpContext.User.Identity;
 
             var user = _userRepository.GetByID(userId);
-            
+            if (user == null)
+            {
+                return NotFound($"User not found with id {userId}");
+            }
+            else
+            {
+                return Ok(user.Tasks);
+            }
 
-            return Ok(user.Tasks);
         }
     }
 }
