@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +12,10 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using todo.api.Auth;
 using todo.api.Middlewares;
+using todo.domain.Models;
 using todo.infrastructure.persistence;
 using todo.infrastructure.shared.Data;
 using todo.infrastructure.shared.Interfaces;
@@ -34,6 +37,7 @@ namespace todo.api
         {
 
             services.AddControllers();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -63,20 +67,50 @@ namespace todo.api
             services.AddTransient(typeof(ITaskRepository), typeof(TaskRepository));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
             //add authentication
-            services.AddAuthentication(options=>
-                      {
-                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                      })
-                    .AddJwtBearer("Bearer", options =>
-                     {
-                          options.Authority = "https://localhost:5001";
-                          options.TokenValidationParameters = new TokenValidationParameters
-                                                                   {
-                                                                     ValidateAudience = false
-                                                                   };
+            //services.AddAuthentication(options=>
+            //          {
+            //            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //          })
+            //        .AddJwtBearer("Bearer", options =>
+            //         {
+            //              options.Authority = "https://localhost:5001";
+            //              options.TokenValidationParameters = new TokenValidationParameters
+            //                                                       {
+            //                                                         ValidateAudience = false
+            //                                                       };
 
-                     });
+            //         });
+
+            // For Identity  
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddDefaultTokenProviders();
+
+
+            // Adding Authentication  
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+            // Adding Jwt Bearer  
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                };
+            });
+
 
             services.AddAuthorization(options =>
             {
@@ -84,6 +118,8 @@ namespace todo.api
                 options.AddPolicy("AppUser", policy => policy.Requirements.Add(new RoleRequirement("AppUser")));
 
             });
+
+
             services.AddHttpContextAccessor();
 
             services.AddScoped<IAuthorizationHandler, RoleHandler>();
