@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using todo.domain.Enums;
 
 namespace todo.domain.Models
 {
@@ -17,7 +18,7 @@ namespace todo.domain.Models
         {
             Description = description;
             CreatedBy = user;
-            //Status = new Status()
+            Status = Status.Pending;
         }
     }
 }
