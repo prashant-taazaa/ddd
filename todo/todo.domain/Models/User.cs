@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 
 namespace todo.domain.Models
@@ -7,14 +8,20 @@ namespace todo.domain.Models
     {
         private string _email;
 
+        private string _name;
+             
         public string Email { get { return _email; } set { _email = value; } }
+        public string Name { get { return _name; } set { _name = value; } }
+
         public virtual Collection<Task> Tasks { get; protected set; } = new Collection<Task>();
 
         private User() { }
 
-        public User(string email)
+        public User(Guid id, string name, string email)
         {
+            Id = id;
             Email = email;
+            Name = name;
             Tasks = new Collection<Task>();
         }
 

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using todo.api.Contracts.Requests;
 using todo.api.Contracts.Response;
 using todo.domain.Models;
+using todo.infrastructure.shared.Interfaces;
 
 namespace todo.api.Controllers
 {
@@ -23,14 +24,17 @@ namespace todo.api.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserRepository _userRepository;
+
 
         public AccountsController(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration, IUserRepository userRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userRepository = userRepository;
         }
 
         [HttpPost]
@@ -46,7 +50,8 @@ namespace todo.api.Controllers
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(ClaimTypes.Role,user.Role)
+                    new Claim(ClaimTypes.Role,user.Role),
+                    new Claim(ClaimTypes.Sid,user.Id)
                 };
 
                 foreach (var userRole in userRoles)
@@ -85,13 +90,49 @@ namespace todo.api.Controllers
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Email
+                UserName = model.Email,
+                Name = model.Name,
+                Role = model.Role
             };
+
             var result = await _userManager.CreateAsync(user, model.Password);
+           
+
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            var applicationUser = await  _userManager.FindByNameAsync(model.Email);
+
+            _userRepository.Add(
+                new User(Guid.Parse(applicationUser.Id),
+                applicationUser.Name,
+                applicationUser.Email)
+                              );
+            await _userRepository.SaveChangesAsync();
+
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] string username)
+        {
+            var userExists = await _userManager.FindByNameAsync(username);
+            if (userExists == null)
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User Not exists!" });
+
+            var result = await _userManager
+                      .DeleteAsync(userExists);
+          
+            if (!result.Succeeded)
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User Deletion failed! Please check user details and try again." });
+
+            var user = _userRepository.GetByID(Guid.Parse(userExists.Id));
+
+            if (user != null)
+                _userRepository.Delete(Guid.Parse(userExists.Id));
+
+            return Ok(new Response { Status = "Success", Message = "User deleted successfully!" });
         }
     }
 }

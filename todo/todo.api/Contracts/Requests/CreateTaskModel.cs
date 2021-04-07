@@ -10,7 +10,5 @@ namespace todo.api.Contracts.Requests
     {
         [Required]
         public string Description { get; set; }
-        [Required]
-        public Guid UserId { get; set; }
     }
 }
