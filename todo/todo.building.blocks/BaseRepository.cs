@@ -12,7 +12,7 @@ namespace todo.infrastructure.shared
     public class BaseRepository<T,RContext> : IRepository<T> where T : Aggregate
     {
         private DbContext _dbContext;
-        private DbSet<T> _dbSet;
+        public DbSet<T> _dbSet;
 
         public BaseRepository(IDbContext<RContext> dbContext)
         {
