@@ -10,7 +10,6 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 })
 export class AppComponent implements OnInit {
 
-  private apiBaseUri = 'https://localhost:6001/api';
   loading: boolean = false;
 
   constructor(private _httpClient: HttpClient,
@@ -21,14 +20,14 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loading = true;
-    this.oidcSecurityService.checkAuth().subscribe((auth) => {
-      console.log('is authenticated', auth);
-      this.loading = false;
-      if (!auth) {
-         this.oidcSecurityService.authorize();
-      }
-    });
+    // this.loading = true;
+    // this.oidcSecurityService.checkAuth().subscribe((auth) => {
+    //   console.log('is authenticated', auth);
+    //   this.loading = false;
+    //   if (!auth) {
+    //      this.oidcSecurityService.authorize();
+    //   }
+    // });
 
   }
 }

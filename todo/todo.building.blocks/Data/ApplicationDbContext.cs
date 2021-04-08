@@ -13,7 +13,9 @@ namespace todo.infrastructure.shared.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
+
                  .HasMany<Task>();
+                 
         }
 
         public DbSet<User> Users { get; set; }
