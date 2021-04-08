@@ -17,14 +17,10 @@ namespace todo.api.Controllers
     [Authorize]
     public class AppBaseController : ControllerBase
     {
-        public User _user;
-        public Guid _userId;
-        public AppBaseController(IUserRepository userRepository)
+      
+        public AppBaseController()
         {
-            var sid = HttpContext.GetUserSid();
-            _userId = sid;
-            _user = userRepository.GetByID(sid);
-
+          
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using todo.api.Contracts.Requests;
 using todo.api.Extensions;
 using todo.domain.Enums;
+using todo.domain.Models;
 using todo.infrastructure.shared.Interfaces;
 
 namespace todo.api.Controllers
@@ -19,7 +20,7 @@ namespace todo.api.Controllers
         private readonly IMapper _mapper;
         public TasksController(ITaskRepository taskRepository, 
             IUserRepository userRepository,
-            IMapper mapper):base(userRepository)
+            IMapper mapper)
         {
             _taskRepository = taskRepository;
             _userRepository = userRepository;
@@ -40,12 +41,14 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskModel createTaskModel)
         {
-            if (_user == null)
+            var user = (User)HttpContext.Items["currentUser"];
+
+            if (user == null)
             {
-                return NotFound($"User not found with id {_userId}");
+                return NotFound($"User not found");
             }
 
-            var task = _user.CreateTask(createTaskModel.Description);
+            var task = user.CreateTask(createTaskModel.Description);
 
             _taskRepository.Add(task);
 
@@ -68,15 +71,15 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTasks()
         {
-         
+            var user = (User)HttpContext.Items["currentUser"];
 
-            if (_user == null)
+            if (user == null)
             {
-                return NotFound($"User not found with id {_userId}");
+                return NotFound($"User not found");
             }
             else
             {
-                var tasks = _taskRepository.GetUserTasks(_user);
+                var tasks = _taskRepository.GetUserTasks(user);
 
                 return Ok(tasks);
             }
@@ -130,15 +133,15 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTasksByStatus([FromRoute] Status status)
         {
-          
+            var user = (User)HttpContext.Items["currentUser"];
 
-            if (_user == null)
+            if (user == null)
             {
-                throw new Exception($"User not found with id {_userId}");
+                throw new Exception($"User not found");
                 //return NotFound($"User not found with id {_userId}");
             }
 
-            var tasks = _taskRepository.GetUserTasksByStatus(_user, status);
+            var tasks = _taskRepository.GetUserTasksByStatus(user, status);
 
             return Ok(tasks);
         }

@@ -12,9 +12,9 @@ namespace todo.api.Extensions
         public static Guid GetUserSid(this HttpContext context)
         {
             var sid = context?.User.Claims
-     .Where(x => x.Type == ClaimTypes.Sid)?
-     .Select(x => x.Value)
-     .FirstOrDefault();
+                   .Where(x => x.Type == ClaimTypes.Sid)?
+                   .Select(x => x.Value)
+                   .FirstOrDefault();
             if (string.IsNullOrEmpty(sid))
             {
                 return Guid.Empty;

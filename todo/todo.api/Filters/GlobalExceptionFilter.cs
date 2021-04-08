@@ -20,7 +20,6 @@ namespace todo.api.Filters
         public GlobalExceptionFilter(ILogger<GlobalExceptionFilter> logger)
         {
             _logger = logger;
-            _logger.LogDebug(1, "NLog injected into GlobalExceptionFilter");
         }
         public void OnException(ExceptionContext context)
         {
