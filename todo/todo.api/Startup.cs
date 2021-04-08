@@ -14,6 +14,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using todo.api.Auth;
+using todo.api.Filters;
 using todo.api.Middlewares;
 using todo.domain.Models;
 using todo.infrastructure.persistence;
@@ -36,7 +37,7 @@ namespace todo.api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers()
+            services.AddControllers(config => config.Filters.Add(typeof(GlobalExceptionFilter)))
                     .AddNewtonsoftJson(options =>
                                          options.SerializerSettings.ReferenceLoopHandling
                                             = Newtonsoft.Json.ReferenceLoopHandling.Ignore
