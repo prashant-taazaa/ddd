@@ -25,6 +25,15 @@
         "ASPNETCORE_ENVIRONMENT": "Prod"
       },
       "applicationUrl": "https://localhost:6001;http://localhost:6000"
+    },
+    "todo.api.development": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:6001;http://localhost:6000"
     }
   }
 }

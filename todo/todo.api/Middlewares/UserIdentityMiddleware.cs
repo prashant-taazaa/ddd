@@ -11,20 +11,18 @@ namespace todo.api.Middlewares
     public class UserIdentityMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IUserRepository _userRepository;
-        public UserIdentityMiddleware(RequestDelegate next, IUserRepository userRepository)
+        public UserIdentityMiddleware(RequestDelegate next)
         {
             _next = next;
-            _userRepository = userRepository;
         }
 
-        public Task Invoke(HttpContext context)
+        public Task Invoke(HttpContext context, IUserRepository userRepository)
         {
             var sid = context.GetUserSid();
 
             if (Guid.Empty != sid)
             {
-                context.Items.Add("currentUser", _userRepository.GetByID(sid));
+                context.Items.Add("currentUser", userRepository.GetByID(sid));
             }
 
             return _next(context);
