@@ -19,7 +19,7 @@ namespace todo.api.Controllers
         private readonly IMapper _mapper;
         public TasksController(ITaskRepository taskRepository, 
             IUserRepository userRepository,
-            IMapper mapper)
+            IMapper mapper):base(userRepository)
         {
             _taskRepository = taskRepository;
             _userRepository = userRepository;
@@ -40,17 +40,12 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskModel createTaskModel)
         {
-
-            var sid = HttpContext.GetUserSid();
-
-            var user = _userRepository.GetByID(sid);
-
-            if (user == null)
+            if (_user == null)
             {
-                return NotFound($"User not found with id {sid}");
+                return NotFound($"User not found with id {_userId}");
             }
 
-            var task = user.CreateTask(createTaskModel.Description);
+            var task = _user.CreateTask(createTaskModel.Description);
 
             _taskRepository.Add(task);
 
@@ -73,17 +68,15 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTasks()
         {
-            var sid = HttpContext.GetUserSid();
+         
 
-            var user = _userRepository.GetByID(sid);
-
-            if (user == null)
+            if (_user == null)
             {
-                return NotFound($"User not found with id {sid}");
+                return NotFound($"User not found with id {_userId}");
             }
             else
             {
-                var tasks = _taskRepository.GetUserTasks(user);
+                var tasks = _taskRepository.GetUserTasks(_user);
 
                 return Ok(tasks);
             }
@@ -137,16 +130,14 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTasksByStatus([FromRoute] Status status)
         {
-            var sid = HttpContext.GetUserSid();
+          
 
-            var user = _userRepository.GetByID(sid);
-
-            if (user == null)
+            if (_user == null)
             {
-                return NotFound($"User not found with id {sid}");
+                return NotFound($"User not found with id {_userId}");
             }
 
-            var tasks = _taskRepository.GetUserTasksByStatus(user, status);
+            var tasks = _taskRepository.GetUserTasksByStatus(_user, status);
 
             return Ok(tasks);
         }

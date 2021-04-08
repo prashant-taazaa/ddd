@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using todo.api.Extensions;
 using todo.domain.Models;
+using todo.infrastructure.shared.Interfaces;
 
 namespace todo.api.Controllers
 {
@@ -15,13 +17,13 @@ namespace todo.api.Controllers
     [Authorize]
     public class AppBaseController : ControllerBase
     {
-        //public ApplicationUser _user;
-        //private readonly UserManager<ApplicationUser> _userManager;
-
-        public AppBaseController()
+        public User _user;
+        public Guid _userId;
+        public AppBaseController(IUserRepository userRepository)
         {
-            //_userManager = userManager;
-            //var context = HttpContext.User.Identity;
+            var sid = HttpContext.GetUserSid();
+            _userId = sid;
+            _user = userRepository.GetByID(sid);
 
         }
     }
