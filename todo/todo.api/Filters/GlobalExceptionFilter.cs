@@ -1,17 +1,27 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection.Metadata;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace todo.api.Filters
 {
     public class GlobalExceptionFilter : IExceptionFilter
     {
+
+        private readonly ILogger<GlobalExceptionFilter> _logger;
+        public GlobalExceptionFilter(ILogger<GlobalExceptionFilter> logger)
+        {
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into GlobalExceptionFilter");
+        }
         public void OnException(ExceptionContext context)
         {
             HttpStatusCode statusCode = (context.Exception as WebException != null &&
@@ -19,40 +29,40 @@ namespace todo.api.Filters
                     ((HttpWebResponse)(context.Exception as WebException).Response).StatusCode
                     : getErrorCode(context.Exception.GetType());
             string errorMessage = context.Exception.Message;
-            string customErrorMessage = "System Error";
             string stackTrace = context.Exception.StackTrace;
+
+
+            string body = string.Empty;
+            //if (context.HttpContext != null)
+            //{
+            //    using var receiveStream = context.HttpContext.Request.Body;
+            //    using var readStream = new StreamReader(receiveStream);
+            //    body = readStream.ReadToEndAsync().
+            //}
+        
+           
 
             HttpResponse response = context.HttpContext.Response;
             response.StatusCode = (int)statusCode;
             response.ContentType = "application/json";
-            var result = JsonConvert.SerializeObject(
-                new
-                {
-                    message = customErrorMessage,
-                    isError = true,
-                    errorMessage = errorMessage,
-                    errorCode = statusCode,
-                    model = string.Empty
-                });
+
+
+            var error = JsonConvert.SerializeObject(new { 
+            ErrorMessage = errorMessage,
+            StackTrace= stackTrace,
+            StatusCode = (int)statusCode,
+            RequestPath = context.HttpContext?.Request.Path.ToString(),
+            RequestHeaders = context.HttpContext?.Request.QueryString.ToString(),
+            RequestBody = body,
+            RequestMethod = context.HttpContext?.Request.Method
+            });
+
 
             #region Logging  
-            //if (ConfigurationHelper.GetConfig()[ConfigurationHelper.environment].ToLower() != "dev")  
-            //{  
-            //    LogMessage objLogMessage = new LogMessage()  
-            //    {  
-            //        ApplicationName = ConfigurationHelper.GetConfig()["ApplicationName"].ToString(),  
-            //        ComponentType = (int) ComponentType.Server,  
-            //        ErrorMessage = errorMessage,  
-            //        LogType = (int) LogType.EventViewer,  
-            //        ErrorStackTrace = stackTrace,  
-            //        UserName = Common.GetAccNameDev(context.HttpContext)  
-            //    };  
-            //    LogError(objLogMessage, LogEntryType.Error);  
-            //}  
+            _logger.LogError(error);
             #endregion Logging  
 
-            response.ContentLength = result.Length;
-            response.WriteAsync(result);
+            response.WriteAsync(error);
         }
 
         private HttpStatusCode getErrorCode(Type exceptionType)

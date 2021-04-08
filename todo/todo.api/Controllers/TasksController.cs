@@ -125,7 +125,8 @@ namespace todo.api.Controllers
         /// <response code="200">List of task of logged in User</response>
         /// <response code="404">If the user not found</response>
         [HttpGet("get-by-status/{status}")]
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTasksByStatus([FromRoute] Status status)
@@ -134,7 +135,8 @@ namespace todo.api.Controllers
 
             if (_user == null)
             {
-                return NotFound($"User not found with id {_userId}");
+                throw new Exception($"User not found with id {_userId}");
+                //return NotFound($"User not found with id {_userId}");
             }
 
             var tasks = _taskRepository.GetUserTasksByStatus(_user, status);

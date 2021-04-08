@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+Wb7eWP8G4ldQntCoXw5eoWjuJxBnR48YPxQI5XqaovKqGfVv/FKsuHpCoKjPRf7NgeKe0MUPhwP2GZW+7s54Q==",
+  "dgSpecHash": "4UsMInuENX11B1NnpxAOkL4YktpjE5QDW6W41QdAB55UDRWUJphv6S3EWNbXADIq17Kwf6qzOzlCV9FFqhvNvg==",
   "success": true,
   "projectFilePath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\todo.api.csproj",
   "expectedPackageFiles": [
@@ -65,6 +65,8 @@
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\nlog\\4.7.9\\nlog.4.7.9.nupkg.sha512",
+    "C:\\Users\\prashant.kumar\\.nuget\\packages\\nlog.extensions.logging\\1.7.2\\nlog.extensions.logging.1.7.2.nupkg.sha512",
+    "C:\\Users\\prashant.kumar\\.nuget\\packages\\nlog.web.aspnetcore\\4.12.0\\nlog.web.aspnetcore.4.12.0.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\npgsql\\4.1.2\\npgsql.4.1.2.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\3.1.0\\npgsql.entityframeworkcore.postgresql.3.1.0.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.1\\swashbuckle.aspnetcore.6.1.1.nupkg.sha512",
