@@ -125,8 +125,7 @@ namespace todo.api.Controllers
         /// <response code="200">List of task of logged in User</response>
         /// <response code="404">If the user not found</response>
         [HttpGet("get-by-status/{status}")]
-        //[Authorize(Policy = "Admin")]
-        [AllowAnonymous]
+        [Authorize(Policy = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTasksByStatus([FromRoute] Status status)

@@ -33,15 +33,6 @@ namespace todo.api.Filters
 
 
             string body = string.Empty;
-            //if (context.HttpContext != null)
-            //{
-            //    using var receiveStream = context.HttpContext.Request.Body;
-            //    using var readStream = new StreamReader(receiveStream);
-            //    body = readStream.ReadToEndAsync().
-            //}
-        
-           
-
             HttpResponse response = context.HttpContext.Response;
             response.StatusCode = (int)statusCode;
             response.ContentType = "application/json";
@@ -59,7 +50,7 @@ namespace todo.api.Filters
 
 
             #region Logging  
-            _logger.LogError(error);
+            _logger.LogError(errorMessage);
             #endregion Logging  
 
             response.WriteAsync(error);

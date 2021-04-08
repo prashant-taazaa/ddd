@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using NLog.Web;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,22 @@ namespace todo.api
     {
         public static void Main(string[] args)
         {
-            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            var configuringFileName = "nlog.config";
+
+            //If we inspect the Hosting aspnet code, we'll see that it internally looks the 
+            //ASPNETCORE_ENVIRONMENT environment variable to determine the actual environment
+            var aspnetEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            var environmentSpecificLogFileName = $"nlog.{aspnetEnvironment}.config";
+
+            if (File.Exists(environmentSpecificLogFileName))
+            {
+                configuringFileName = environmentSpecificLogFileName;
+            }
+
+            // NLog: setup the logger first to catch all errors
+            var logger = NLogBuilder.ConfigureNLog(configuringFileName).GetCurrentClassLogger();
+
             try
             {
                 logger.Debug("init program");
@@ -45,6 +61,7 @@ namespace todo.api
                     logging.ClearProviders();
                     logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
+
                  .UseNLog(); // NLog: Setup NLog for Dependency injection
     }
 #pragma warning restore CS1591
