@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Extensions.Logging;
 using NLog.Web;
 using System;
 using System.Collections.Generic;
@@ -16,38 +18,26 @@ namespace todo.api
     {
         public static void Main(string[] args)
         {
-            var configuringFileName = "nlog.config";
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var config = new ConfigurationBuilder()
+                             .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                             .AddJsonFile($"appsettings{env}.json", optional: true, reloadOnChange: true)
+                             .Build();
+            LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
 
-            //If we inspect the Hosting aspnet code, we'll see that it internally looks the 
-            //ASPNETCORE_ENVIRONMENT environment variable to determine the actual environment
-            var aspnetEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-            var environmentSpecificLogFileName = $"nlog.{aspnetEnvironment}.config";
-
-            if (File.Exists(environmentSpecificLogFileName))
-            {
-                configuringFileName = environmentSpecificLogFileName;
-            }
-
-            // NLog: setup the logger first to catch all errors
-            var logger = NLogBuilder.ConfigureNLog(configuringFileName).GetCurrentClassLogger();
-
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog(LogManager.Configuration).GetCurrentClassLogger();
             try
             {
-                logger.Debug("init program");
+                logger.Debug("Init main");
                 CreateHostBuilder(args).Build().Run();
-
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //NLog: catch setup errors
-                logger.Error(exception, "Stopped program because of exception");
-                throw;
+                logger.Error(ex, "Stopped program because of exception");
             }
             finally
             {
-                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-                NLog.LogManager.Shutdown();
+                LogManager.Shutdown();
             }
         }
 
@@ -61,8 +51,19 @@ namespace todo.api
                     logging.ClearProviders();
                     logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
+                  .ConfigureAppConfiguration((hostingContext, config) =>
+                  {
+                var env = hostingContext.HostingEnvironment;
 
-                 .UseNLog(); // NLog: Setup NLog for Dependency injection
+                config
+                      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+                config.AddEnvironmentVariables(); // overwrites previous values
+
+             
+                  })
+
+                  .UseNLog(); 
     }
 #pragma warning restore CS1591
 }
