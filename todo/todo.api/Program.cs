@@ -21,9 +21,10 @@ namespace todo.api
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var config = new ConfigurationBuilder()
                              .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                             .AddJsonFile($"appsettings{env}.json", optional: true, reloadOnChange: true)
+                             .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                              .Build();
-            LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
+            var nLogConfig = config.GetSection("NLog");
+            LogManager.Configuration = new NLogLoggingConfiguration(nLogConfig);
 
             var logger = NLog.Web.NLogBuilder.ConfigureNLog(LogManager.Configuration).GetCurrentClassLogger();
             try
@@ -51,17 +52,17 @@ namespace todo.api
                     logging.ClearProviders();
                     logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
-                  .ConfigureAppConfiguration((hostingContext, config) =>
-                  {
-                var env = hostingContext.HostingEnvironment;
+                //  .ConfigureAppConfiguration((hostingContext, config) =>
+                //  {
+                //var env = hostingContext.HostingEnvironment;
 
-                config
-                      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                //config
+                //      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-                config.AddEnvironmentVariables(); // overwrites previous values
+                //config.AddEnvironmentVariables(); // overwrites previous values
 
              
-                  })
+                //  })
 
                   .UseNLog(); 
     }
