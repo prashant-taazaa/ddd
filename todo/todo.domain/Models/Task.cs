@@ -20,5 +20,11 @@ namespace todo.domain.Models
             CreatedBy = user;
             Status = Status.Pending;
         }
+
+        public Task(string description)
+        {
+            Description = description;
+            Status = Status.Pending;
+        }
     }
 }

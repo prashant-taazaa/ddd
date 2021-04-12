@@ -87,7 +87,32 @@ namespace todo.api.Controllers
         }
 
 
+        /// <summary>
+        /// Return All task of logged in user
+        /// </summary>
+        /// <returns>List of task of logged in User </returns>
+        /// <response code="200">List of task of logged in User</response>
+        /// <response code="404">If the user not found</response>
+        [HttpGet("get-all")]
+        //[Authorize(Policy = "Admin")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetAllTasks()
+        {
+            //_taskRepository.Add(new domain.Models.Task("Change remote battries"));
+            //_taskRepository.Add(new domain.Models.Task("Change remote battries 1"));
+            //_taskRepository.Add(new domain.Models.Task("Change remote battries 2"));
+            //_taskRepository.Add(new domain.Models.Task("Change remote battries 3"));
+            //_taskRepository.Add(new domain.Models.Task("Change remote battries 4"));
+            //_taskRepository.Add(new domain.Models.Task("Change remote battries 5"));
 
+            _taskRepository.Delete(Guid.Parse("0a615616-a597-4bcf-9e88-aef182ba5f23"));
+            var tasks = _taskRepository.GetAll();
+
+            return Ok(tasks);
+
+        }
 
         /// <summary>
         /// Update Task

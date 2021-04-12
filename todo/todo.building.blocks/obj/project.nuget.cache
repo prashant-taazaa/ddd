@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vdf1Xj8tUosFNaS9vpGXBYSM5jMk+OruLSivysjACKDRvio3cjdKRKIKsfSGx3f2aL/xx0pbG7MbsZPsy4q+XQ==",
+  "dgSpecHash": "tGJEgWgkUFG1zpbUJeuM2imCJNRcXuYVBHPIc50mUyVJz8TZBNknN0JARiFZ562VclfV8e0xY/nHz34CP6mXXA==",
   "success": true,
   "projectFilePath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj",
   "expectedPackageFiles": [
@@ -50,6 +50,7 @@
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
+    "C:\\Users\\prashant.kumar\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\npgsql\\4.1.2\\npgsql.4.1.2.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\3.1.0\\npgsql.entityframeworkcore.postgresql.3.1.0.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",

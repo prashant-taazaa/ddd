@@ -14,7 +14,7 @@ namespace todo.api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class AppBaseController : ControllerBase
     {
       

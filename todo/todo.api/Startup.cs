@@ -69,28 +69,20 @@ namespace todo.api
                 .AddDbContext<IdentityDbContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("IdentityConnectionString")));
 
-         
-            services.AddScoped(typeof(IDbContext<ApplicationDbContext>), typeof(ApplicationDbContext));
-            services.AddScoped(typeof(IDbContext<IdentityDbContext>), typeof(IdentityDbContext));
+            var filesDbPath = Configuration.GetConnectionString("FilesDbPath");
+            services.AddTransient(_ =>
+                 new ApplicationFilesDbContext(filesDbPath)
+            );
+          
+            
+            services.AddTransient(typeof(IDbContext<ApplicationDbContext>), typeof(ApplicationDbContext));
+            services.AddTransient(typeof(IDbContext<IdentityDbContext>), typeof(IdentityDbContext));
+            services.AddTransient(typeof(IDbContext<ApplicationFilesDbContext>), typeof(ApplicationFilesDbContext));
 
-            services.AddTransient(typeof(ITaskRepository), typeof(TaskRepository));
+            //services.AddTransient(typeof(ITaskRepository), typeof(TaskRepository));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
-            //add authentication
-            //services.AddAuthentication(options=>
-            //          {
-            //            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //          })
-            //        .AddJwtBearer("Bearer", options =>
-            //         {
-            //              options.Authority = "https://localhost:5001";
-            //              options.TokenValidationParameters = new TokenValidationParameters
-            //                                                       {
-            //                                                         ValidateAudience = false
-            //                                                       };
-
-            //         });
-
+            services.AddTransient(typeof(ITaskRepository), typeof(TaskFilesRepository));
+      
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>()
