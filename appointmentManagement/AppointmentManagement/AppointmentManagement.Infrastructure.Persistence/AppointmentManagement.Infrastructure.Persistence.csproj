@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppointmentManagement.Core\AppointmentManagement.Core.csproj" />
+    <ProjectReference Include="..\AppointmentManagement.Infrastructure.Shared\AppointmentManagement.Infrastructure.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
