@@ -9,22 +9,17 @@ using todo.api.Contracts.Requests;
 using todo.api.Extensions;
 using todo.domain.Enums;
 using todo.domain.Models;
-using todo.infrastructure.shared.Interfaces;
+using TodoApplication.Application.Dto;
+using TodoApplication.Application.Interfaces;
 
 namespace todo.api.Controllers
 {
     public class TasksController : AppBaseController
     {
-        private readonly ITaskRepository _taskRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
-        public TasksController(ITaskRepository taskRepository, 
-            IUserRepository userRepository,
-            IMapper mapper)
+        private readonly ITaskService _taskService;
+        public TasksController(ITaskService taskService )
         {
-            _taskRepository = taskRepository;
-            _userRepository = userRepository;
-            _mapper = mapper;
+            _taskService = taskService;
         }
 
 
@@ -47,12 +42,7 @@ namespace todo.api.Controllers
             {
                 return NotFound($"User not found");
             }
-
-            var task = user.CreateTask(createTaskModel.Description);
-
-            _taskRepository.Add(task);
-
-            await _taskRepository.SaveChangesAsync();
+            var task = await _taskService.CreateTaskAsync(createTaskModel.Description, user);
 
             return Created(@$"api/tasks/{task.Id}", task);
 
@@ -79,14 +69,12 @@ namespace todo.api.Controllers
             }
             else
             {
-                var tasks = _taskRepository.GetUserTasks(user);
+                var tasks = _taskService.GetUserTasks(user.Id);
 
                 return Ok(tasks);
             }
 
         }
-
-
 
 
         /// <summary>
@@ -103,17 +91,7 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateTaskAsync([FromBody] UpdateTaskModel updateTaskModel, [FromRoute] Guid id)
         {
-            var task = _taskRepository.GetByID(id);
-
-            if (task == null)
-                return NotFound($"Task with id {id} not found");
-
-            task.Status = updateTaskModel.Status;
-            task.Description = updateTaskModel.Description ?? task.Description;
-
-            _taskRepository.Update(task);
-
-            await _taskRepository.SaveChangesAsync();
+            await _taskService.UpdateTaskAsync(id, updateTaskModel);
 
             return Ok("Task Updated Successfully");
         }
@@ -127,7 +105,7 @@ namespace todo.api.Controllers
         /// <returns>List of tasks</returns>
         /// <response code="200">List of task of logged in User</response>
         /// <response code="404">If the user not found</response>
-        [HttpGet("get-by-status/{status}")]
+        [HttpGet("status/{status}")]
         [Authorize(Policy = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -141,7 +119,7 @@ namespace todo.api.Controllers
                 //return NotFound($"User not found with id {_userId}");
             }
 
-            var tasks = _taskRepository.GetUserTasksByStatus(user, status);
+            var tasks = _taskService.GetUserTasksByStatus(user.Id, status);
 
             return Ok(tasks);
         }
@@ -157,14 +135,7 @@ namespace todo.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteTaskAsync([FromRoute] Guid id)
         {
-            var task = _taskRepository.GetByID(id);
-
-            if (task == null)
-                return NotFound($"Task with id {id} not found");
-
-            _taskRepository.Delete(id);
-
-            await _taskRepository.SaveChangesAsync();
+            await _taskService.DeleteTaskAsync(id);
 
             return Ok("Task Deleted Successfully");
         }

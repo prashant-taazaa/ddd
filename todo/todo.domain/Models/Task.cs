@@ -1,24 +1,44 @@
 ﻿using System.Collections.ObjectModel;
 using todo.domain.Enums;
+using System;
 
 namespace todo.domain.Models
 {
     public class Task : Aggregate
     {
-        private string _description;
-        private User _createdBy;
-       
-        public string Description { get { return _description; } set { _description = value; } }
-        public User CreatedBy { get { return _createdBy; } set { _createdBy = value; } }
-        public virtual Status Status { get; set; }
+        public string Description { get; protected set; }
+        public User CreatedBy { get; protected set; }
+        public Status Status { get; protected set; }
         public virtual Collection<Tag> Tags { get; set; } = new Collection<Tag>();
 
-        private Task() { }
-        public Task(string description, User user)
+        public static Task Create(string description, User user)
+        {
+            if(string.IsNullOrEmpty(description))
+                throw new ArgumentNullException("description");
+
+            return new Task()
+            {
+                Description = description,
+                CreatedBy = user,
+                Status = Status.Pending
+
+            };
+        }
+
+        public void UpdateStatus(Status status)
+        {
+            Status = status;
+        }
+
+        public void UpdateDescription(string description)
         {
             Description = description;
-            CreatedBy = user;
-            Status = Status.Pending;
         }
+
+        public void AddTag(Tag tag)
+        {
+            Tags.Add(tag);
+        }
+
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using todo.domain.Enums;
 
-namespace todo.api.Contracts.Requests
+namespace TodoApplication.Application.Dto
 {
-    public class CreateTaskModel
+    public class UpdateTaskModel
     {
-        [Required]
+        public Status Status { get; set; }
         public string Description { get; set; }
+
     }
 }

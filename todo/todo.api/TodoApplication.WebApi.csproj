@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\todo.domain\TodoApplication.Domain.csproj" />
     <ProjectReference Include="..\todo.repositories\TodoApplication.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\TodoApplication.Application\TodoApplication.Application.csproj" />
   </ItemGroup>
 
 

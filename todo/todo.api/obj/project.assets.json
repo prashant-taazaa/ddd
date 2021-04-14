@@ -1059,6 +1059,19 @@
           "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
       },
+      "TodoApplication.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "TodoApplication.Infrastructure.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TodoApplication.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TodoApplication.Application.dll": {}
+        }
+      },
       "TodoApplication.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2854,6 +2867,11 @@
         "version.txt"
       ]
     },
+    "TodoApplication.Application/1.0.0": {
+      "type": "project",
+      "path": "../TodoApplication.Application/TodoApplication.Application.csproj",
+      "msbuildProject": "../TodoApplication.Application/TodoApplication.Application.csproj"
+    },
     "TodoApplication.Domain/1.0.0": {
       "type": "project",
       "path": "../todo.domain/TodoApplication.Domain.csproj",
@@ -2884,6 +2902,7 @@
       "NLog.Web.AspNetCore >= 4.12.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 3.1.0",
       "Swashbuckle.AspNetCore >= 6.1.1",
+      "TodoApplication.Application >= 1.0.0",
       "TodoApplication.Domain >= 1.0.0",
       "TodoApplication.Infrastructure.Persistence >= 1.0.0"
     ]
@@ -2920,6 +2939,9 @@
             },
             "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\TodoApplication.Infrastructure.Persistence.csproj": {
               "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\TodoApplication.Infrastructure.Persistence.csproj"
+            },
+            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\TodoApplication.Application\\TodoApplication.Application.csproj": {
+              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\TodoApplication.Application\\TodoApplication.Application.csproj"
             }
           }
         }

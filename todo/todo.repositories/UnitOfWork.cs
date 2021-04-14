@@ -13,14 +13,10 @@ namespace todo.infrastructure.persistence
         where TRepository : IRepository
     {
         private readonly IRepository<TRepository> _repository;
-        //private readonly IDbContext<RContext> _dbContext;
-        //public  DbContext _c1 { get; private set; }
 
         public UnitOfWork( IRepository<TRepository> repository)
         {
             _repository = repository;
-            //_dbContext = dbContext;
-            //_c1 = dbContext as DbContext;
 
         }
 

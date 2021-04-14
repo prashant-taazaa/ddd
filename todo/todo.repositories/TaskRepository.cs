@@ -16,16 +16,16 @@ namespace todo.infrastructure.persistence
 
         }
 
-        public IList<Task> GetUserTasks(User user)
+        public IList<Task> GetUserTasks(Guid userId)
         {
-          return  _dbSet.Where(x => x.CreatedBy == user).ToList();
+          return  _dbSet.Where(x => x.CreatedBy.Id == userId).ToList();
         }
 
-        public IList<Task> GetUserTasksByStatus(User user, Status status)
+        public IList<Task> GetUserTasksByStatus(Guid userId, Status status)
         {
             var tasks = from task in _dbSet
                         where task.Status == status
-                        && task.CreatedBy == user
+                        && task.CreatedBy.Id == userId
                         select task;
            
             return tasks.ToList();

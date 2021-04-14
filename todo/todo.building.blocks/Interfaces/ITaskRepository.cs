@@ -9,7 +9,7 @@ namespace todo.infrastructure.shared.Interfaces
 {
     public interface ITaskRepository : IRepository<Task>
     {
-        IList<domain.Models.Task> GetUserTasks(User user);
-        IList<domain.Models.Task> GetUserTasksByStatus(User user, Status status);
+        IList<domain.Models.Task> GetUserTasks(Guid userId);
+        IList<domain.Models.Task> GetUserTasksByStatus(Guid userId, Status status);
     }
 }

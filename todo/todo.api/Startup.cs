@@ -20,6 +20,8 @@ using todo.domain.Models;
 using todo.infrastructure.persistence;
 using todo.infrastructure.shared.Data;
 using todo.infrastructure.shared.Interfaces;
+using TodoApplication.Application.Interfaces;
+using TodoApplication.Application.Services;
 
 namespace todo.api
 {
@@ -75,21 +77,8 @@ namespace todo.api
 
             services.AddTransient(typeof(ITaskRepository), typeof(TaskRepository));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
-            //add authentication
-            //services.AddAuthentication(options=>
-            //          {
-            //            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //          })
-            //        .AddJwtBearer("Bearer", options =>
-            //         {
-            //              options.Authority = "https://localhost:5001";
-            //              options.TokenValidationParameters = new TokenValidationParameters
-            //                                                       {
-            //                                                         ValidateAudience = false
-            //                                                       };
 
-            //         });
+            services.AddTransient<ITaskService, TaskService>();
 
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()

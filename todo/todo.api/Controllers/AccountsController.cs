@@ -104,7 +104,7 @@ namespace todo.api.Controllers
             var applicationUser = await  _userManager.FindByNameAsync(model.Email);
 
             _userRepository.Add(
-                new User(Guid.Parse(applicationUser.Id),
+                 todo.domain.Models.User.Create(Guid.Parse(applicationUser.Id),
                 applicationUser.Name,
                 applicationUser.Email)
                               );

@@ -6,31 +6,22 @@ namespace todo.domain.Models
 {
     public class User : Aggregate
     {
-        private string _email;
-
-        private string _name;
-             
-        public string Email { get { return _email; } set { _email = value; } }
-        public string Name { get { return _name; } set { _name = value; } }
+        public string Email { get; protected set; }
+        public string Name { get; protected set; }
 
         public virtual Collection<Task> Tasks { get; protected set; } = new Collection<Task>();
 
-        private User() { }
-
-        public User(Guid id, string name, string email)
+        public static User Create(Guid id, string name, string email)
         {
-            Id = id;
-            Email = email;
-            Name = name;
-            Tasks = new Collection<Task>();
-        }
+            return new User()
+            {
+                Id = id,
+                Email = email,
+                Name = name,
+                Tasks = new Collection<Task>()
+            };
 
-        public Task CreateTask(string description)
-        {
-            var task = new Task(description, this);
-            Tasks.Add(task);
-
-            return task;
         }
     }
 }
+
