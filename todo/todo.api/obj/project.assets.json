@@ -1059,36 +1059,36 @@
           "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
       },
-      "todo.domain/1.0.0": {
+      "TodoApplication.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.Extensions.Identity.Stores": "3.1.0"
         },
         "compile": {
-          "bin/placeholder/todo.domain.dll": {}
+          "bin/placeholder/TodoApplication.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/todo.domain.dll": {}
+          "bin/placeholder/TodoApplication.Domain.dll": {}
         }
       },
-      "todo.infrastructure.persistence/1.0.0": {
+      "TodoApplication.Infrastructure.Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "3.1.0",
-          "todo.domain": "1.0.0",
-          "todo.infrastructure.shared": "1.0.0"
+          "TodoApplication.Domain": "1.0.0",
+          "TodoApplication.Infrastructure.Shared": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/todo.infrastructure.persistence.dll": {}
+          "bin/placeholder/TodoApplication.Infrastructure.Persistence.dll": {}
         },
         "runtime": {
-          "bin/placeholder/todo.infrastructure.persistence.dll": {}
+          "bin/placeholder/TodoApplication.Infrastructure.Persistence.dll": {}
         }
       },
-      "todo.infrastructure.shared/1.0.0": {
+      "TodoApplication.Infrastructure.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
@@ -1096,13 +1096,13 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.0",
           "Microsoft.EntityFrameworkCore": "3.1.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "3.1.0",
-          "todo.domain": "1.0.0"
+          "TodoApplication.Domain": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/todo.infrastructure.shared.dll": {}
+          "bin/placeholder/TodoApplication.Infrastructure.Shared.dll": {}
         },
         "runtime": {
-          "bin/placeholder/todo.infrastructure.shared.dll": {}
+          "bin/placeholder/TodoApplication.Infrastructure.Shared.dll": {}
         }
       }
     }
@@ -2854,20 +2854,20 @@
         "version.txt"
       ]
     },
-    "todo.domain/1.0.0": {
+    "TodoApplication.Domain/1.0.0": {
       "type": "project",
-      "path": "../todo.domain/todo.domain.csproj",
-      "msbuildProject": "../todo.domain/todo.domain.csproj"
+      "path": "../todo.domain/TodoApplication.Domain.csproj",
+      "msbuildProject": "../todo.domain/TodoApplication.Domain.csproj"
     },
-    "todo.infrastructure.persistence/1.0.0": {
+    "TodoApplication.Infrastructure.Persistence/1.0.0": {
       "type": "project",
-      "path": "../todo.repositories/todo.infrastructure.persistence.csproj",
-      "msbuildProject": "../todo.repositories/todo.infrastructure.persistence.csproj"
+      "path": "../todo.repositories/TodoApplication.Infrastructure.Persistence.csproj",
+      "msbuildProject": "../todo.repositories/TodoApplication.Infrastructure.Persistence.csproj"
     },
-    "todo.infrastructure.shared/1.0.0": {
+    "TodoApplication.Infrastructure.Shared/1.0.0": {
       "type": "project",
-      "path": "../todo.building.blocks/todo.infrastructure.shared.csproj",
-      "msbuildProject": "../todo.building.blocks/todo.infrastructure.shared.csproj"
+      "path": "../todo.building.blocks/TodoApplication.Infrastructure.Shared.csproj",
+      "msbuildProject": "../todo.building.blocks/TodoApplication.Infrastructure.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2884,8 +2884,8 @@
       "NLog.Web.AspNetCore >= 4.12.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 3.1.0",
       "Swashbuckle.AspNetCore >= 6.1.1",
-      "todo.domain >= 1.0.0",
-      "todo.infrastructure.persistence >= 1.0.0"
+      "TodoApplication.Domain >= 1.0.0",
+      "TodoApplication.Infrastructure.Persistence >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2894,9 +2894,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\todo.api.csproj",
-      "projectName": "todo.api",
-      "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\todo.api.csproj",
+      "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\TodoApplication.WebApi.csproj",
+      "projectName": "TodoApplication.WebApi",
+      "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\TodoApplication.WebApi.csproj",
       "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
       "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.api\\obj\\",
       "projectStyle": "PackageReference",
@@ -2915,11 +2915,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
-              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj"
+            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\TodoApplication.Domain.csproj": {
+              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\TodoApplication.Domain.csproj"
             },
-            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj": {
-              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\todo.infrastructure.persistence.csproj"
+            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\TodoApplication.Infrastructure.Persistence.csproj": {
+              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.repositories\\TodoApplication.Infrastructure.Persistence.csproj"
             }
           }
         }

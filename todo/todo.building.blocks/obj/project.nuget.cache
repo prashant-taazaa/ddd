@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vdf1Xj8tUosFNaS9vpGXBYSM5jMk+OruLSivysjACKDRvio3cjdKRKIKsfSGx3f2aL/xx0pbG7MbsZPsy4q+XQ==",
+  "dgSpecHash": "vy4FFKnSYp5wjADXyUI7EVqaA956LHbmNp1fEf4BPuUNtQhO2Sg1pptH0ET2iBmT7kpu96MbxUT7CdoUqUyk1g==",
   "success": true,
-  "projectFilePath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj",
+  "projectFilePath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\TodoApplication.Infrastructure.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\prashant.kumar\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

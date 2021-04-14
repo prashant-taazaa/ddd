@@ -772,17 +772,17 @@
           "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
       },
-      "todo.domain/1.0.0": {
+      "TodoApplication.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Microsoft.Extensions.Identity.Stores": "3.1.0"
         },
         "compile": {
-          "bin/placeholder/todo.domain.dll": {}
+          "bin/placeholder/TodoApplication.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/todo.domain.dll": {}
+          "bin/placeholder/TodoApplication.Domain.dll": {}
         }
       }
     }
@@ -2033,10 +2033,10 @@
         "version.txt"
       ]
     },
-    "todo.domain/1.0.0": {
+    "TodoApplication.Domain/1.0.0": {
       "type": "project",
-      "path": "../todo.domain/todo.domain.csproj",
-      "msbuildProject": "../todo.domain/todo.domain.csproj"
+      "path": "../todo.domain/TodoApplication.Domain.csproj",
+      "msbuildProject": "../todo.domain/TodoApplication.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2047,7 +2047,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 3.1.0",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 3.1.0",
-      "todo.domain >= 1.0.0"
+      "TodoApplication.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2056,9 +2056,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj",
-      "projectName": "todo.infrastructure.shared",
-      "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\todo.infrastructure.shared.csproj",
+      "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\TodoApplication.Infrastructure.Shared.csproj",
+      "projectName": "TodoApplication.Infrastructure.Shared",
+      "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\TodoApplication.Infrastructure.Shared.csproj",
       "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
       "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.building.blocks\\obj\\",
       "projectStyle": "PackageReference",
@@ -2077,8 +2077,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj": {
-              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj"
+            "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\TodoApplication.Domain.csproj": {
+              "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\TodoApplication.Domain.csproj"
             }
           }
         }

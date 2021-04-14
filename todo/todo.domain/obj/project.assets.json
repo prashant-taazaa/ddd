@@ -374,9 +374,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj",
-      "projectName": "todo.domain",
-      "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\todo.domain.csproj",
+      "projectUniqueName": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\TodoApplication.Domain.csproj",
+      "projectName": "TodoApplication.Domain",
+      "projectPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\TodoApplication.Domain.csproj",
       "packagesPath": "C:\\Users\\prashant.kumar\\.nuget\\packages\\",
       "outputPath": "D:\\workspace\\learnings\\dotNetCore\\ddd\\todo\\todo.domain\\obj\\",
       "projectStyle": "PackageReference",

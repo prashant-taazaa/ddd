@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\todo.domain\todo.domain.csproj" />
-    <ProjectReference Include="..\todo.repositories\todo.infrastructure.persistence.csproj" />
+    <ProjectReference Include="..\todo.domain\TodoApplication.Domain.csproj" />
+    <ProjectReference Include="..\todo.repositories\TodoApplication.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 
