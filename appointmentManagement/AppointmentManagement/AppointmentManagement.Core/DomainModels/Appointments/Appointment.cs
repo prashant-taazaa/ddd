@@ -20,7 +20,7 @@ namespace AppointmentManagement.Core.DomainModels.Appointments
         public virtual Client Client { get; protected set; }
         public virtual Mentor Mentor { get; protected set; }
         public virtual DateTime CreatedAt { get; protected set; }
-        public virtual AppointmentStatus IsClosed { get; protected set; }
+        public virtual AppointmentStatus Status { get; protected set; }
         public CancelAppointment  CancelAppointment { get; set; }
 
         public virtual ReadOnlyCollection<AppointmentNote> Notes { get { return this.notes.AsReadOnly(); } }
@@ -42,9 +42,9 @@ namespace AppointmentManagement.Core.DomainModels.Appointments
                 AppointmentSlot = appointmentSlot,
                 Client = client,
                 CreatedAt = DateTime.UtcNow,
-                IsClosed = false,
                 Mentor = mentor,
-                Payment = payment
+                Payment = payment,
+                Status = AppointmentStatus.Pending
             };
         }
 
